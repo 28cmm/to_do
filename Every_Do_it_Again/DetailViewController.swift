@@ -10,7 +10,13 @@ import UIKit
 
 class DetailViewController: UIViewController {
 
+    @IBOutlet weak var switchs: UISwitch!
+    @IBOutlet weak var myLabel: UILabel!
     @IBOutlet weak var detailDescriptionLabel: UILabel!
+    @IBOutlet weak var switchLabel: UILabel!
+    
+    
+    
 
 
     func configureView() {
@@ -19,11 +25,27 @@ class DetailViewController: UIViewController {
             if let label = detailDescriptionLabel {
                 label.text = detail.todoDescription!.description
                 
-                label.text = ("\(String(describing: detail.title!)): \(String(describing: detail.todoDescription!)), P:\(detail.priorityNumber)")
+                label.text = ("title - \(String(describing: detail.title!)): Describe - \(String(describing: detail.todoDescription!)), Detail:\(detail.priorityNumber)")
+                switchs.isOn = detail.isCompleted
+                switchLabel.textAlignment = .center
+                
             }
         }
     }
-
+    @IBAction func completeSwitch(_ sender: UISwitch) {
+        if sender.isOn == true{
+            switchLabel.text = "Complete"
+        }else{
+            switchLabel.text = "Not Complete"
+        }
+        if let detail = detailItem{
+            detail.isCompleted = sender.isOn
+        }
+        if let appDelegate = UIApplication.shared.delegate as? AppDelegate{
+            appDelegate.saveContext()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.

@@ -46,39 +46,6 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
 
     @objc
     func insertNewObject(_ sender: Any) {
-        promptNewToDo()
-//        let context = self.fetchedResultsController.managedObjectContext
-//        let newEvent = ToDo(context: context)
-//
-//        // If appropriate, configure the new managed object.
-//        //newEvent.timestamp = Date()
-//
-//        // Save the context.
-//        do {
-//            try context.save()
-//        } catch {
-//            // Replace this implementation with code to handle the error appropriately.
-//            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-//            let nserror = error as NSError
-//            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-//        }
-    }
-
-    // MARK: - Segues
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showDetail" {
-            if let indexPath = tableView.indexPathForSelectedRow {
-            let object = fetchedResultsController.object(at: indexPath)
-                let controller = (segue.destination as! UINavigationController).topViewController as! DetailViewController
-                controller.detailItem = object
-                controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
-                controller.navigationItem.leftItemsSupplementBackButton = true
-            }
-        }
-    }
-    
-    func promptNewToDo() {
         let alert = UIAlertController(title: "New Task",
                                       message: "Enter details here",
                                       preferredStyle: .alert)
@@ -89,9 +56,6 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
             let todoDescriptionField = alert.textFields![1]
             let priorityField = alert.textFields![2]
             
-            
-            
-            
             let context = self.fetchedResultsController.managedObjectContext
             let newToDo = ToDo(context: context)
             
@@ -99,7 +63,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
             newToDo.title = titleField.text
             newToDo.todoDescription = todoDescriptionField.text
             newToDo.priorityNumber =   Int16(priorityField.text ?? "0") ?? 0
-            
+            newToDo.isCompleted = false
             
             
             // Save the context.
@@ -135,13 +99,27 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
             textPriority.placeholder = UserDefaults.standard.value(forKey: self.priorityKey) as? String
             
         }
-
+        
         alert.addAction(saveAction)
         alert.addAction(cancelAction)
         
         present(alert, animated: true, completion: nil)
-        
     }
+
+    // MARK: - Segues
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showDetail" {
+            if let indexPath = tableView.indexPathForSelectedRow {
+            let object = fetchedResultsController.object(at: indexPath)
+                let controller = (segue.destination as! UINavigationController).topViewController as! DetailViewController
+                controller.detailItem = object
+                controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
+                controller.navigationItem.leftItemsSupplementBackButton = true
+            }
+        }
+    }
+
 
     // MARK: - Table View
 
@@ -191,11 +169,16 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         let info : String = "\(labelInfo): \(priority)";
         
         cell.detailTextLabel?.text = info
+        if(todo.isCompleted == false){
+            cell.backgroundColor = UIColor.gray
+        }else{
+             cell.backgroundColor = UIColor.yellow
+        }
     }
 
     // MARK: - Fetched results controller
 
-    var fetchedResultsController: NSFetchedResultsController<ToDo> {
+     var fetchedResultsController: NSFetchedResultsController<ToDo> {
         if _fetchedResultsController != nil {
             return _fetchedResultsController!
         }
@@ -207,6 +190,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         
         // Edit the sort key as appropriate.
         let sortDescriptor = NSSortDescriptor(key: "title", ascending: true)
+       
         
         fetchRequest.sortDescriptors = [sortDescriptor]
         

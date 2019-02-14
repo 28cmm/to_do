@@ -35,18 +35,38 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Detail view content goes here" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="0XM-y9-sOw">
-                                <rect key="frame" x="20" y="323.5" width="335" height="20.5"/>
+                                <rect key="frame" x="20" y="323.5" width="335" height="176.5"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Ukb-ys-I6i">
+                                <rect key="frame" x="163" y="152" width="49" height="31"/>
+                                <connections>
+                                    <action selector="completeSwitch:" destination="JEX-9P-axG" eventType="valueChanged" id="qQ0-fS-CwA"/>
+                                </connections>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Not Completed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dI8-Xw-hZR">
+                                <rect key="frame" x="129" y="108" width="117" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="0XM-y9-sOw" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leading" constant="20" symbolic="YES" id="Tsc-yG-G1q"/>
-                            <constraint firstItem="0XM-y9-sOw" firstAttribute="centerY" secondItem="svH-Pt-448" secondAttribute="centerY" id="jWN-iV-94e"/>
-                            <constraint firstAttribute="trailing" secondItem="0XM-y9-sOw" secondAttribute="trailing" constant="20" symbolic="YES" id="tHV-ZD-HQj"/>
+                            <constraint firstItem="0XM-y9-sOw" firstAttribute="leading" secondItem="VUw-jc-0yf" secondAttribute="leading" constant="20" id="0HM-cy-tdn"/>
+                            <constraint firstItem="Ukb-ys-I6i" firstAttribute="leading" secondItem="VUw-jc-0yf" secondAttribute="leading" constant="163" id="5hr-WU-RUZ"/>
+                            <constraint firstItem="VUw-jc-0yf" firstAttribute="trailing" secondItem="Ukb-ys-I6i" secondAttribute="trailing" constant="165" id="8hN-rU-pX2"/>
+                            <constraint firstItem="dI8-Xw-hZR" firstAttribute="leading" secondItem="VUw-jc-0yf" secondAttribute="leading" constant="129" id="ACb-Si-2Oe"/>
+                            <constraint firstItem="VUw-jc-0yf" firstAttribute="trailing" secondItem="dI8-Xw-hZR" secondAttribute="trailing" constant="129" id="Nyr-0c-j3v"/>
+                            <constraint firstItem="VUw-jc-0yf" firstAttribute="bottom" secondItem="dI8-Xw-hZR" secondAttribute="bottom" constant="538" id="VRl-VZ-DQo"/>
+                            <constraint firstItem="VUw-jc-0yf" firstAttribute="trailing" secondItem="0XM-y9-sOw" secondAttribute="trailing" constant="20" id="WR2-PD-nEz"/>
+                            <constraint firstItem="Ukb-ys-I6i" firstAttribute="top" secondItem="VUw-jc-0yf" secondAttribute="top" constant="88" id="lWx-b4-cU3"/>
+                            <constraint firstItem="VUw-jc-0yf" firstAttribute="bottom" secondItem="0XM-y9-sOw" secondAttribute="bottom" constant="167" id="t7j-ik-lfK"/>
+                            <constraint firstItem="dI8-Xw-hZR" firstAttribute="top" secondItem="VUw-jc-0yf" secondAttribute="top" constant="44" id="xev-dG-d5N"/>
+                            <constraint firstItem="0XM-y9-sOw" firstAttribute="top" secondItem="Ukb-ys-I6i" secondAttribute="bottom" constant="140.5" id="zEo-HC-CXY"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="VUw-jc-0yf"/>
                     </view>
@@ -54,11 +74,14 @@
                     <navigationItem key="navigationItem" title="Detail" id="mOI-FS-AaM"/>
                     <connections>
                         <outlet property="detailDescriptionLabel" destination="0XM-y9-sOw" id="deQ-Na-JPF"/>
+                        <outlet property="myLabel" destination="dI8-Xw-hZR" id="4Cm-QB-X7Z"/>
+                        <outlet property="switchLabel" destination="dI8-Xw-hZR" id="8Gc-Oa-0wa"/>
+                        <outlet property="switchs" destination="Ukb-ys-I6i" id="d7l-Ji-jZK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FJe-Yq-33r" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="709" y="129"/>
+            <point key="canvasLocation" x="708" y="128.18590704647679"/>
         </scene>
         <!--Split View Controller-->
         <scene sceneID="Nki-YV-4Qg">
